@@ -2,18 +2,19 @@
 var express=require("express"),
     bodyParser=require("body-parser"),
     mongoose=require("mongoose"),
-    location=require("./models/locations"),
     method=require("method-override"),
     passport=require("passport"),
-    local=require("passport-local")
-    User=require("./models/user"),
+    local=require("passport-local"),
     moment=require("moment"),
     flash=require("connect-flash")
+    location = require("./models/locations"),
     Comment=require("./models/comments"),
+    User = require("./models/user"),
     app=express();
 var indexRoutes=require("./routes/index")    
 var locationRoute = require("./routes/location")
 var commentRoute=require("./routes/comments")  
+mongoose.connect("mongodb://locations:locations123@ds235411.mlab.com:35411/myapp2", { useNewUrlParser: true }); 
 app.use(express.static(__dirname + "/public"));  
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(flash())
@@ -38,10 +39,9 @@ app.use(function(req,res,next){
 })    
 app.use("/", indexRoutes)
 app.use("/locations",locationRoute)
-app.use("/locations/:id/comments",commentRoute)
-mongoose.connect("mongodb://locations:locations123@ds235411.mlab.com:35411/myapp2",{ useNewUrlParser: true });    
+app.use("/locations/:id/comments",commentRoute)   
 app.set("view engine", "ejs");    
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Our app is running on port ${PORT}`);
+// const PORT = 3000;
+app.listen(3000,function() {
+    console.log(`Our app is running on port`);
 });
