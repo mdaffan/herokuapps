@@ -1,4 +1,3 @@
-
 var express=require("express"),
     bodyParser=require("body-parser"),
     mongoose=require("mongoose"),
@@ -7,7 +6,7 @@ var express=require("express"),
     local=require("passport-local"),
     moment=require("moment"),
     flash=require("connect-flash")
-    location = require("./models/locations"),
+    Location = require("./models/locations"),
     Comment=require("./models/comments"),
     User = require("./models/user"),
     app=express();

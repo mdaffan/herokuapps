@@ -13,7 +13,7 @@ function checkLocations(req, res, next) {
                     next();
                 } else {
                     req.flash("nope", "You are not the same shit who registered for This")
-                    res.redirect("back")
+                    res.redirect("/locations")
                 }
 
             }

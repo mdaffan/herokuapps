@@ -1,16 +1,17 @@
-var Location=("../models/locations")
+var Location=("../models/locations");
+var Comment=("../models/comments.js")
 var middlewareObj={}
 middlewareObj.checkLocations = function(req, res, next) {
     if (req.isAuthenticated()) {
         Location.findById(req.params.id, function(err, found) {
             if (err) {
-                req.flash("nope", "location is khaali peeli")
+                req.flash("error", "location is khaali peeli")
                 throw err
             } else {
                 if (found.author.id.equals(req.user._id)) {
                    next();
                 } else {
-                    req.flash("nope", "You are not the same shit who registered for This")
+                    req.flash("error", "You are not the same shit who registered for This")
                     res.redirect("back")
                 }
 

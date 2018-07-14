@@ -3,7 +3,7 @@ var router=express.Router(),
     passport=require("passport")
 var User=require("../models/user")
 router.get("/",function(req,res){
-    res.send("hi")
+    res.render("landing")
 })
 router.get("/register",function(req,res){
     res.render("register")
