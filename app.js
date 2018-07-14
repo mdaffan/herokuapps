@@ -40,7 +40,7 @@ app.use("/", indexRoutes)
 app.use("/locations",locationRoute)
 app.use("/locations/:id/comments",commentRoute)   
 app.set("view engine", "ejs");    
-// const PORT = 3000;
-app.listen(3000,function() {
+var port = process.env.PORT || 3000;
+app.listen(port,function() {
     console.log(`Our app is running on port`);
 });
