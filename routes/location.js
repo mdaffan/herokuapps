@@ -9,7 +9,7 @@ function checkLocations(req, res, next) {
                 req.flash("nope", "location is khaali peeli")
                 throw err
             } else {
-                if (found.author.id.equals(req.user._id)) {
+                if (found.author.id.equals(req.user._id) || req.user && req.user.isAdmin) {
                     next();
                 } else {
                     req.flash("nope", "You are not the same shit who registered for This")

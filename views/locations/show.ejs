@@ -19,7 +19,7 @@
                      </p>
                     <p class="card-text"><%=location.description%></p>
                 </div>
-                 <% if(current && location.author.id.equals(current._id)){ %> 
+                 <% if(current && location.author.id.equals(current._id) || current && current.isAdmin){ %> 
                 <form style="display:in-line" class="ml-2 mr-2 mb-2" action="/locations/<%=location._id%>?_method=DELETE" method="POST">
                     <button class="btn btn-primary">DELETE</button>
                      <a href="/locations/<%=location._id%>/edit" class="btn btn-warning">Update</a>

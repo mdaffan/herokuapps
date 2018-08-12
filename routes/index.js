@@ -10,11 +10,18 @@ router.get("/register",function(req,res){
 })
 router.post("/register",function(req,res){
     var newUser=new User({username:req.body.username})
+    if (req.body.adminCode === "secret") {
+        newUser.isAdmin =true
+    }
     User.register(newUser,req.body.password,function(err,user){
+       
         if(err){
             req.flash("error",err.message)
             res.redirect("/register")
-        }else{res.redirect("/locations")}
+        }passport.authenticate("local")(req,res,function(){
+            req.flash("success","Nice to meet you "+ req.body.username)
+            res.redirect("/locations")
+        })
     })
 })
 router.get("/login",function(req,res){
