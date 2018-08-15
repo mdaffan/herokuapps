@@ -30,6 +30,19 @@ function checkLocations(req, res, next) {
     
 // })
 router.get("/", function (req, res) {
+    if(req.query.search){
+        const regex=new RegExp(escapeRegex(req.query.search),'gi')
+        Location.find({ name: regex }, function (err, location) {
+            if (err) {
+                throw err
+            } else {
+
+                res.render("locations/index", { location: location })
+            }
+        })
+    }
+    else{
+    
     Location.find({},function(err,location){
         if(err){
             throw err
@@ -38,8 +51,9 @@ router.get("/", function (req, res) {
             res.render("locations/index",{location:location})
         }
     })
-    
+    }    
 })
+
 router.post("/", middleware.isLoggedIn,function (req, res) {
     var name = req.body.name;
     var   image = req.body.image,
@@ -80,6 +94,8 @@ router.delete("/:id", checkLocations,function(req,res){
         }else{res.redirect("/locations")}
     })
 })
-
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 module.exports=router;
